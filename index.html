@@ -1076,47 +1076,6 @@ svg.i {
 .note--in { top: 15%; right: -2%; }
 .note--out { bottom: 25%; right: -4%; }
 
-/* Terminal do diagnóstico */
-.terminal {
-  --radius: 28px;
-  position: absolute;
-  left: -14%;
-  bottom: 2%;
-  z-index: 3;
-  width: min(392px, 78%);
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  line-height: 1.55;
-}
-.js .hero .terminal {
-  opacity: 0;
-  translate: 0 26px;
-  transition: opacity 1.2s var(--ease) 0.75s, translate 1.4s var(--ease) 0.75s;
-}
-.js .hero.is-ready .terminal { opacity: 1; translate: none; }
-.terminal__bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 12px 14px 11px 16px;
-  border-bottom: 1px solid var(--line);
-}
-.terminal__title {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--silver-2);
-  font-size: 11.5px;
-  letter-spacing: 0.02em;
-}
-.terminal__title svg { width: 15px; height: 15px; }
-.terminal__body {
-  display: grid;
-  gap: 3px;
-  padding: 14px 16px 12px;
-  min-height: 176px;
-}
 .t-line { color: var(--silver); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .t-line[data-line] { opacity: 0; translate: 0 4px; transition: opacity 0.5s var(--ease), translate 0.5s var(--ease); }
 .t-line[data-line].is-on { opacity: 1; translate: none; }
@@ -1132,18 +1091,6 @@ svg.i {
   animation: blink 1.1s steps(1) infinite;
 }
 @keyframes blink { 50% { opacity: 0; } }
-.terminal__foot {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 16px;
-  padding: 11px 16px 13px;
-  border-top: 1px solid var(--line);
-  color: var(--silver-2);
-  font-size: 11.5px;
-}
-.terminal__foot span { display: inline-flex; align-items: center; gap: 7px; }
-.terminal__foot b { font-weight: 500; color: var(--silver); }
-.terminal__foot .dot { width: 6px; height: 6px; }
 .dot--ok { color: var(--green-text); }
 .dot--warn { color: var(--amber); }
 .dot--wait { color: var(--silver-2); }
@@ -1189,7 +1136,6 @@ svg.i {
   .hero { align-items: flex-start; }
   .hero__inner { grid-template-columns: minmax(0, 1fr); gap: 56px; }
   .hero__visual { justify-self: center; max-width: 560px; }
-  .terminal { position: relative; left: auto; bottom: auto; width: 100%; max-width: 440px; margin: -16% auto 0; }
   .scroll-cue { display: none; }
 }
 @media (max-height: 699px) and (min-width: 1024px) {
@@ -1201,7 +1147,6 @@ svg.i {
   .fact { --radius: 24px; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 14px 12px 13px; min-height: 100px; }
   .fact__num { font-size: 30px; }
   .fact__label { font-size: 12.5px; }
-  .terminal { margin-top: -20%; font-size: 12px; }
 }
 
 /* ---------- 9. Faixa de tecnologias ------------------------------------- */
@@ -2862,8 +2807,7 @@ select.input option { background: var(--surface); color: var(--silver); }
   .js [data-reveal],
   .js .hero [data-hero],
   .js .hero .w,
-  .js .hero .stage,
-  .js .hero .terminal {
+  .js .hero .stage {
     translate: none !important;
     scale: none !important;
     filter: none !important;
@@ -3094,28 +3038,6 @@ select.input option { background: var(--surface); color: var(--silver); }
           <div class="note note--out">
             <span class="note__node"></span><span class="note__line"></span>
             <span class="note__text"><span class="note__k">Saída</span><span class="note__v">decisões claras</span></span>
-          </div>
-        </div>
-
-        <p class="sr-only">Ilustração de um diagnóstico automático com dados fictícios: as fontes de dados são conectadas, um modelo de previsão é treinado e o sistema aponta 3 produtos com margem abaixo do custo.</p>
-
-        <div class="terminal glass glass--strong" aria-hidden="true">
-          <div class="terminal__bar">
-            <span class="terminal__title"><svg class="i" aria-hidden="true"><use href="#i-terminal"/></svg>diagnostico.log</span>
-            <span class="tag">Dados fictícios</span>
-          </div>
-          <div class="terminal__body">
-            <p class="t-line"><span class="t-prompt">$</span><span class="t-typed" data-text="drummond run diagnostico">drummond run diagnostico</span><span class="t-caret"></span></p>
-            <p class="t-line" data-line><span class="t-ok">[ok]</span> Fontes: planilhas, vendas, WhatsApp</p>
-            <p class="t-line" data-line><span class="t-ok">[ok]</span> 12.480 vendas organizadas</p>
-            <p class="t-line" data-line><span class="t-ok">[ok]</span> Modelo de previsão treinado</p>
-            <p class="t-line" data-line><span class="t-warn">[!]</span> 3 produtos com margem abaixo do custo</p>
-            <p class="t-line" data-line><span class="t-ok">[ok]</span> Relatório pronto para o dono</p>
-          </div>
-          <div class="terminal__foot">
-            <span data-status data-at="0" data-final="ativo" data-kind="ok"><i class="dot dot--ok"></i>Pipeline <b>ativo</b></span>
-            <span data-status data-at="2" data-final="treinado" data-kind="ok"><i class="dot dot--ok"></i>Modelo <b>treinado</b></span>
-            <span data-status data-at="3" data-final="1" data-kind="warn"><i class="dot dot--warn"></i>Alertas <b>1</b></span>
           </div>
         </div>
       </div>
