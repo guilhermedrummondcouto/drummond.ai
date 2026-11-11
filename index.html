@@ -3788,9 +3788,10 @@ select.input option { background: var(--surface); color: var(--silver); }
       <div class="console glass glass--strong" data-reveal>
         <div class="console__bar">
           <span class="console__cmd"><span class="t-prompt" aria-hidden="true">&gt;</span>novo_projeto.init()<span class="t-caret" aria-hidden="true"></span></span>
-          <span class="tag">Protótipo</span>
+          <span class="tag">Contato</span>
         </div>
         <form class="console__form" id="lead-form" novalidate>
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <div class="field__row">
             <div class="field">
               <label class="field__label" for="f-nome">Seu nome <span class="field__req">(obrigatório)</span></label>
@@ -3801,6 +3802,11 @@ select.input option { background: var(--surface); color: var(--silver); }
               <label class="field__label" for="f-segmento">Segmento do negócio</label>
               <input class="input" id="f-segmento" name="segmento" type="text" autocomplete="off" placeholder="Ex.: padaria, clínica, loja de roupas">
             </div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-contato">Como falar com você <span class="field__req">(obrigatório)</span></label>
+            <input class="input" id="f-contato" name="contato" type="text" autocomplete="email" required aria-required="true" aria-describedby="f-contato-erro" placeholder="WhatsApp ou e-mail">
+            <p class="field__error" id="f-contato-erro"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg><span>Informe um WhatsApp ou e-mail para eu te responder.</span></p>
           </div>
           <div class="field">
             <label class="field__label" for="f-area">Área de interesse</label>
@@ -3824,7 +3830,7 @@ select.input option { background: var(--surface); color: var(--silver); }
           </div>
         </form>
         <div class="console__out" role="status" aria-live="polite"></div>
-        <p class="console__foot"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg>Protótipo: este formulário não envia dados.</p>
+        <p class="console__foot"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg>Seus dados vão direto para a Drummond.ai e só são usados para responder à sua ideia.</p>
       </div>
     </div>
   </section>
@@ -6378,41 +6384,77 @@ select.input option { background: var(--surface); color: var(--silver); }
       if (cls === 't-prompt') s.setAttribute('aria-hidden', 'true');
       return s;
     }
+    const contato = $('#f-contato');
+    const cerr = $('#f-contato-erro');
+    contato.addEventListener('input', () => { if (contato.value.trim()) { contato.removeAttribute('aria-invalid'); cerr.classList.remove('is-on'); } });
+    const ENDPOINT = 'https://formsubmit.co/ajax/drummond.ai.solucoes@gmail.com';
+    function show(lines) {
+      out.textContent = '';
+      const gap = motionOK() ? 520 : 0;
+      lines.forEach((l, i) => {
+        setTimeout(() => {
+          out.appendChild(l);
+          requestAnimationFrame(() => l.classList.add('is-on'));
+        }, i * gap);
+      });
+    }
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (busy) return;
       const name = nome.value.trim();
+      const how = contato.value.trim();
       if (!name) {
         nome.setAttribute('aria-invalid', 'true');
         err.classList.add('is-on');
         nome.focus();
         return;
       }
+      if (!how) {
+        contato.setAttribute('aria-invalid', 'true');
+        cerr.classList.add('is-on');
+        contato.focus();
+        return;
+      }
       clearError();
       busy = true;
       submit.setAttribute('aria-disabled', 'true');
-      out.textContent = '';
       const first = name.split(/\s+/)[0];
       const mail = document.createElement('a');
       mail.href = 'mailto:drummond.ai.solucoes@gmail.com';
       mail.textContent = 'drummond.ai.solucoes@gmail.com';
-      const lines = [
-        line([span('t-prompt', '>'), 'validando campos... ', span('t-ok', '[ok]')]),
-        line([span('t-prompt', '>'), `organizando a ideia de ${first}... `, span('t-ok', '[ok]')]),
-        line([span('t-prompt', '>'), 'preparando o diagnóstico inicial... ', span('t-ok', '[ok]')]),
-        line([span('t-ok', '[ok]'), ' Protótipo: nenhum dado foi enviado. Fale pelo ', mail]),
-      ];
-      const gap = motionOK() ? 620 : 0;
-      lines.forEach((l, i) => {
-        setTimeout(() => {
-          out.appendChild(l);
-          requestAnimationFrame(() => l.classList.add('is-on'));
-          if (i === lines.length - 1) {
-            busy = false;
-            submit.removeAttribute('aria-disabled');
-          }
-        }, i * gap);
-      });
+      show([line([span('t-prompt', '>'), 'enviando... '])]);
+      const data = {
+        nome: name,
+        contato: how,
+        segmento: $('#f-segmento').value.trim(),
+        area: $('#f-area').value,
+        ideia: $('#f-ideia').value.trim(),
+        _subject: `Nova ideia pelo site: ${name}`,
+        _template: 'table',
+        _captcha: 'false',
+        _honey: ($('input[name="_honey"]', form) || { value: '' }).value,
+      };
+      if (/@/.test(how)) data._replyto = how;
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+      })
+        .then((r) => r.json().then((j) => ({ ok: r.ok && String(j.success) !== 'false', j })))
+        .then(({ ok }) => {
+          if (!ok) throw new Error('falha');
+          form.reset();
+          show([
+            line([span('t-prompt', '>'), 'enviando... ', span('t-ok', '[ok]')]),
+            line([span('t-ok', '[ok]'), ` Recebido, ${first}. Eu respondo pelo contato que você deixou.`]),
+          ]);
+        })
+        .catch(() => {
+          show([
+            line([span('t-prompt', '>'), 'não deu para enviar agora. Escreva direto para ', mail]),
+          ]);
+        })
+        .finally(() => { busy = false; submit.removeAttribute('aria-disabled'); });
     });
   }
 
