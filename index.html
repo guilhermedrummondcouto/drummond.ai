@@ -1187,7 +1187,7 @@ svg.i {
 .marquee__track {
   display: flex;
   width: max-content;
-  animation: marquee 70s linear infinite;
+  animation: marquee 100s linear infinite;
 }
 .marquee:hover .marquee__track,
 .marquee:focus-within .marquee__track,
@@ -2265,7 +2265,7 @@ svg.i {
 .arch__dots i.is-on::after { opacity: 1; }
 
 @media (min-width: 900px) and (min-height: 620px) {
-  .js .arch--sticky { height: 270vh; padding: 0; }
+  .js .arch--sticky { height: 185vh; padding: 0; }
   .js .arch--sticky .arch__sticky {
     position: sticky;
     top: 0;
@@ -2857,6 +2857,19 @@ select.input option { background: var(--surface); color: var(--silver); }
 .sol-more { margin-top: 28px; padding: 28px 32px; border-radius: 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
 .sol-more__title { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; color: var(--silver); }
 .sol-more__text { margin-top: 6px; color: var(--silver-2); font-size: 16px; line-height: 1.5; max-width: 52ch; }
+
+/* ---------- Ajustes de ritmo e leitura ------------------------------- */
+.tech { padding-top: clamp(28px, 5vw, 56px); }
+.console .console__cmd.console__cmd--plain { font-family: "Geist", system-ui, sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--silver); }
+.demo-tabs { display: none; }
+@media (max-width: 899px) {
+  .js .demo-tabs { display: flex; gap: 4px; padding: 5px; margin: 0 auto 18px; width: fit-content; max-width: 100%; border-radius: 999px; overflow-x: auto; scrollbar-width: none; }
+  .js .demo-tabs::-webkit-scrollbar { display: none; }
+  .demo-tab { flex: 0 0 auto; padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 500; color: var(--silver-2); background: transparent; border: 0; cursor: pointer; min-height: 44px; }
+  .demo-tab[aria-selected="true"] { color: var(--silver); background: rgba(255,255,255,0.1); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14); }
+  .demo-tab:focus-visible { outline: 2px solid var(--blue-text); outline-offset: 2px; }
+  .js .demos .win:not(.is-demo-on) { display: none; }
+}
 </style>
 </head>
 <body>
@@ -3454,6 +3467,13 @@ select.input option { background: var(--surface); color: var(--silver); }
         <p class="section-lead" data-reveal>Quatro demonstrações interativas com dados fictícios. Mexa nos filtros, acompanhe a câmera e veja as respostas aparecerem.</p>
       </header>
 
+      <div class="demo-tabs glass glass--lite" role="tablist" aria-label="Demonstrações" data-reveal>
+        <button class="demo-tab" type="button" role="tab" aria-selected="true" data-demo="demo-dash">Painel</button>
+        <button class="demo-tab" type="button" role="tab" aria-selected="false" data-demo="demo-cam">Câmera</button>
+        <button class="demo-tab" type="button" role="tab" aria-selected="false" data-demo="demo-chat">Agenda</button>
+        <button class="demo-tab" type="button" role="tab" aria-selected="false" data-demo="demo-rag">Documentos</button>
+      </div>
+
       <div class="demos">
         <!-- a) Painel de decisão com slicers -->
         <article class="win win--dash glass glass--tinted-blue" id="demo-dash" aria-labelledby="dash-title" data-reveal>
@@ -3547,7 +3567,7 @@ select.input option { background: var(--surface); color: var(--silver); }
         </article>
 
         <!-- b) Câmera de prateleira -->
-        <article class="win win--cam glass" aria-labelledby="cam-title" data-reveal>
+        <article class="win win--cam glass" id="demo-cam" aria-labelledby="cam-title" data-reveal>
           <div class="win__bar">
             <h3 class="win__title" id="cam-title"><svg class="i" aria-hidden="true"><use href="#i-camera"/></svg><span>Câmera de prateleira</span></h3>
             <span class="tag">Demo · dados fictícios</span>
@@ -3601,7 +3621,7 @@ select.input option { background: var(--surface); color: var(--silver); }
         </article>
 
         <!-- c) Chat -->
-        <article class="win win--chat glass" aria-labelledby="chat-title" data-reveal>
+        <article class="win win--chat glass" id="demo-chat" aria-labelledby="chat-title" data-reveal>
           <div class="win__bar">
             <h3 class="win__title" id="chat-title"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg><span>Assistente de agendamento</span></h3>
             <div class="win__tools">
@@ -3648,7 +3668,7 @@ select.input option { background: var(--surface); color: var(--silver); }
         </article>
 
         <!-- d) Pergunta respondida com base em documentos -->
-        <article class="win win--rag glass" aria-labelledby="rag-title" data-reveal>
+        <article class="win win--rag glass" id="demo-rag" aria-labelledby="rag-title" data-reveal>
           <div class="win__bar">
             <h3 class="win__title" id="rag-title"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg><span>Pergunte aos documentos</span></h3>
             <div class="win__tools">
@@ -3928,7 +3948,7 @@ select.input option { background: var(--surface); color: var(--silver); }
 
       <div class="console glass glass--strong" data-reveal>
         <div class="console__bar">
-          <span class="console__cmd"><span class="t-prompt" aria-hidden="true">&gt;</span>novo_projeto.init()<span class="t-caret" aria-hidden="true"></span></span>
+          <span class="console__cmd console__cmd--plain">Conte sua ideia em 1 minuto</span>
           <span class="tag">Contato</span>
         </div>
         <form class="console__form" id="lead-form" novalidate>
@@ -5125,6 +5145,27 @@ select.input option { background: var(--surface); color: var(--silver); }
         }, delay);
       }, 0.5);
     });
+  }
+
+  /* ---------- Demonstrações em abas (celular) ---------------------------- */
+  function initDemoTabs() {
+    const list = $('.demo-tabs');
+    if (!list) return;
+    const tabs = $$('.demo-tab', list);
+    const wins = tabs.map((t) => document.getElementById(t.dataset.demo));
+    function pick(i, focus) {
+      tabs.forEach((t, k) => { t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
+      wins.forEach((w, k) => { if (w) { w.classList.toggle('is-demo-on', k === i); if (k === i) w.classList.add('is-in'); } });
+      if (focus) tabs[i].focus();
+    }
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => { pick(i); window.dispatchEvent(new Event('resize')); });
+      t.addEventListener('keydown', (e) => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); pick((i + d + tabs.length) % tabs.length, true); window.dispatchEvent(new Event('resize')); }
+      });
+    });
+    pick(0);
   }
 
   /* ---------- Faixa de tecnologias ------------------------------------- */
@@ -6563,7 +6604,7 @@ select.input option { background: var(--surface); color: var(--silver); }
       const mail = document.createElement('a');
       mail.href = 'mailto:drummond.ai.solucoes@gmail.com';
       mail.textContent = 'drummond.ai.solucoes@gmail.com';
-      show([line([span('t-prompt', '>'), 'enviando... '])]);
+      show([line(['Enviando...'])]);
       const data = {
         nome: name,
         contato: how,
@@ -6586,13 +6627,13 @@ select.input option { background: var(--surface); color: var(--silver); }
           if (!ok) throw new Error('falha');
           form.reset();
           show([
-            line([span('t-prompt', '>'), 'enviando... ', span('t-ok', '[ok]')]),
-            line([span('t-ok', '[ok]'), ` Recebido, ${first}. Eu respondo pelo contato que você deixou.`]),
+            line(['Enviando... ', span('t-ok', 'ok')]),
+            line([span('t-ok', 'Pronto!'), ` Recebido, ${first}. Eu respondo pelo contato que você deixou.`]),
           ]);
         })
         .catch(() => {
           show([
-            line([span('t-prompt', '>'), 'não deu para enviar agora. Escreva direto para ', mail]),
+            line(['Não deu para enviar agora. Escreva direto para ', mail]),
           ]);
         })
         .finally(() => { busy = false; submit.removeAttribute('aria-disabled'); });
@@ -6694,6 +6735,7 @@ select.input option { background: var(--surface); color: var(--silver); }
   initCounters();
   initMarquee();
   initTabs();
+  initDemoTabs();
   initDashboard();
   initCamera();
   initChat();
