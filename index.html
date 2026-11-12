@@ -1391,7 +1391,6 @@ svg.i {
 
 @media (max-width: 1023px) {
   .tabpanel__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .tabpanel__grid > .sol:nth-child(3) { grid-column: 1 / -1; }
 }
 @media (max-width: 899px) {
   .tabs { --radius: 26px; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; }
@@ -1401,7 +1400,6 @@ svg.i {
 @media (max-width: 639px) {
   .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tabpanel__grid { grid-template-columns: minmax(0, 1fr); }
-  .tabpanel__grid > .sol:nth-child(3) { grid-column: auto; }
 }
 
 /* ---------- 11. Demonstrações ------------------------------------------- */
@@ -2854,6 +2852,11 @@ select.input option { background: var(--surface); color: var(--silver); }
 /* ---------- Marca de areia (figura de Chladni se formando) ------------ */
 .sandmark { width: min(300px, 68vw); aspect-ratio: 1; margin-top: 38px; }
 .sandmark canvas { width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: pointer; }
+
+/* ---------- Soluções: convite para ideias fora da lista ---------------- */
+.sol-more { margin-top: 28px; padding: 28px 32px; border-radius: 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.sol-more__title { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; color: var(--silver); }
+.sol-more__text { margin-top: 6px; color: var(--silver-2); font-size: 16px; line-height: 1.5; max-width: 52ch; }
 </style>
 </head>
 <body>
@@ -2999,7 +3002,7 @@ select.input option { background: var(--surface); color: var(--silver); }
 
         <div class="hero__ctas" data-hero style="--d: 780ms">
           <a class="btn btn--primary magnetic" href="#contato">Iniciar diagnóstico</a>
-          <a class="btn btn--glass glass glass--lite" href="#solucoes">Explorar 18 soluções</a>
+          <a class="btn btn--glass glass glass--lite" href="#solucoes">Ver exemplos de soluções</a>
         </div>
 
         <ul class="hero__facts" role="list">
@@ -3008,8 +3011,8 @@ select.input option { background: var(--surface); color: var(--silver); }
             <span class="fact__label">frentes de atuação</span>
           </li>
           <li class="fact glass glass--lite" data-hero style="--d: 1000ms">
-            <span class="fact__num metal" data-count="18" data-count-delay="1180">18</span>
-            <span class="fact__label">soluções-modelo</span>
+            <span class="fact__num metal" aria-hidden="true">∞</span>
+            <span class="fact__label">soluções possíveis<span class="sr-only">: sem limite</span></span>
           </li>
           <li class="fact glass glass--lite" data-hero style="--d: 1080ms">
             <svg class="i fact__icon" aria-hidden="true"><use href="#i-flask"/></svg>
@@ -3121,8 +3124,8 @@ select.input option { background: var(--surface); color: var(--silver); }
     <div class="container">
       <header class="section-head">
         <p class="eyebrow" data-reveal><span class="eyebrow__n">01</span> — Soluções</p>
-        <h2 class="section-title" id="sol-title" data-reveal><span class="metal">Dezoito <span class="nowrap">soluções-modelo</span> para</span> <span class="serif accent">adaptar</span> <span class="metal">ao seu negócio.</span></h2>
-        <p class="section-lead" data-reveal>Cada uma parte de um problema comum em pequenas empresas. Escolha a frente, entenda a técnica em linguagem simples e veja o que você recebe no final.</p>
+        <h2 class="section-title" id="sol-title" data-reveal><span class="metal">As soluções não têm fim. Estas são as mais fáceis de</span> <span class="serif accent">começar.</span></h2>
+        <p class="section-lead" data-reveal>Cada negócio tem um problema diferente, então dá para criar uma solução para quase tudo. Estes são exemplos dos pontos de partida mais comuns: escolha a frente, entenda a técnica em linguagem simples e veja o que você recebe no final.</p>
       </header>
 
       <div class="tabs glass glass--lite" role="tablist" aria-label="Frentes de atuação" data-reveal>
@@ -3161,6 +3164,27 @@ select.input option { background: var(--surface); color: var(--silver); }
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Sistema de recomendação:</strong> cruza o histórico de pedidos para encontrar combinações que fazem sentido.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Sugestões prontas para o caixa, o site ou o WhatsApp.</span></p>
             </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S04</span><span class="sol__tech">Classificação</span></div>
+              <h3 class="sol__title">Clientes prestes a ir embora</h3>
+              <p class="sol__desc">Descubra quem está deixando de comprar antes que ele suma, e tenha tempo de chamar de volta.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Classificação:</strong> aprende com quem já parou de comprar e dá uma nota de risco para cada cliente ativo.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Lista semanal dos clientes em risco, com o motivo provável.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S05</span><span class="sol__tech">Ciclo de recompra</span></div>
+              <h3 class="sol__title">Hora certa de recompra</h3>
+              <p class="sol__desc">Saiba quando cada cliente costuma voltar e mande a mensagem no momento em que ele precisa de novo.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Ciclo de recompra:</strong> calcula o intervalo típico entre as compras de cada cliente e avisa quando ele passou do ponto.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Lembretes automáticos para enviar no WhatsApp.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S06</span><span class="sol__tech">Pontuação de leads</span></div>
+              <h3 class="sol__title">Quem atender primeiro</h3>
+              <p class="sol__desc">Organize os contatos que chegam pelo que têm mais chance de fechar, e não pela ordem de chegada.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Pontuação de leads:</strong> dá uma nota a cada contato com base no que aconteceu com contatos parecidos no passado.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Fila de contatos ordenada para a equipe de vendas.</span></p>
+            </article>
           </div>
         </div>
 
@@ -3169,25 +3193,46 @@ select.input option { background: var(--surface); color: var(--silver); }
           <p class="tabpanel__intro">Menos desperdício e menos tempo perdido no dia a dia.</p>
           <div class="tabpanel__grid">
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S04</span><span class="sol__tech">Reposição por previsão</span></div>
+              <div class="sol__top"><span class="sol__code">S07</span><span class="sol__tech">Reposição por previsão</span></div>
               <h3 class="sol__title">Estoque inteligente</h3>
               <p class="sol__desc">Receba o aviso antes do produto acabar e evite dinheiro parado em mercadoria que não gira.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Reposição por previsão:</strong> calcula quando e quanto comprar a partir da demanda esperada.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Alerta de compra no WhatsApp com a quantidade sugerida.</span></p>
             </article>
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S05</span><span class="sol__tech">Otimização de rotas</span></div>
+              <div class="sol__top"><span class="sol__code">S08</span><span class="sol__tech">Otimização de rotas</span></div>
               <h3 class="sol__title">Rotas de entrega</h3>
               <p class="sol__desc">Monte o roteiro do dia com a melhor ordem de paradas para cada entregador.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Otimização de rotas:</strong> compara caminhos possíveis e escolhe o que gasta menos tempo e combustível.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Roteiro pronto no celular de quem entrega.</span></p>
             </article>
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S06</span><span class="sol__tech">Detecção de anomalias</span></div>
+              <div class="sol__top"><span class="sol__code">S09</span><span class="sol__tech">Detecção de anomalias</span></div>
               <h3 class="sol__title">Detecção de desvios</h3>
               <p class="sol__desc">Perceba cedo quedas de venda, gastos fora do comum ou erros de lançamento, antes que virem prejuízo.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Detecção de anomalias:</strong> aprende o que é normal no seu negócio e avisa quando algo foge do padrão.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Alerta automático dizendo o que mudou e onde olhar.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S10</span><span class="sol__tech">Previsão + escala</span></div>
+              <h3 class="sol__title">Escala de equipe pela demanda</h3>
+              <p class="sol__desc">Coloque mais gente nos horários de pico e menos nos dias fracos, sem chute.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Previsão + escala:</strong> junta a previsão de movimento com as regras de turno da equipe.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Escala sugerida por dia e horário.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S11</span><span class="sol__tech">Agendamento inteligente</span></div>
+              <h3 class="sol__title">Menos faltas na agenda</h3>
+              <p class="sol__desc">Preveja quem tem chance de faltar e confirme ou encaixe outro cliente a tempo.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Agendamento inteligente:</strong> olha o histórico de faltas e o perfil de cada agendamento para estimar o risco.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Alerta de horários em risco e lista de encaixe.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S12</span><span class="sol__tech">Controle de validade</span></div>
+              <h3 class="sol__title">Perdas e validade sob controle</h3>
+              <p class="sol__desc">Saiba o que vai vencer antes, faça promoção na hora certa e jogue menos coisa fora.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Controle de validade:</strong> cruza a data de validade com o ritmo de venda de cada item.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Relatório diário do que precisa sair primeiro.</span></p>
             </article>
           </div>
         </div>
@@ -3197,25 +3242,46 @@ select.input option { background: var(--surface); color: var(--silver); }
           <p class="tabpanel__intro">Responder rápido, sem perder o toque humano.</p>
           <div class="tabpanel__grid">
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S07</span><span class="sol__tech">LLM</span></div>
+              <div class="sol__top"><span class="sol__code">S13</span><span class="sol__tech">LLM</span></div>
               <h3 class="sol__title">Assistente virtual 24h no WhatsApp</h3>
               <p class="sol__desc">Responda dúvidas, informe preços e agende horários a qualquer hora, passando para uma pessoa quando necessário.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>LLM (modelo de linguagem):</strong> IA que entende perguntas e escreve respostas em português natural.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Assistente funcionando no WhatsApp Business da empresa.</span></p>
             </article>
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S08</span><span class="sol__tech">Análise de sentimento</span></div>
+              <div class="sol__top"><span class="sol__code">S14</span><span class="sol__tech">Análise de sentimento</span></div>
               <h3 class="sol__title">Análise de avaliações</h3>
               <p class="sol__desc">Transforme centenas de comentários em uma lista clara do que os clientes elogiam e do que reclamam.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Análise de sentimento:</strong> lê cada avaliação e identifica se o cliente gostou ou não, e por quê.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Relatório mensal com os temas mais citados e exemplos.</span></p>
             </article>
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S09</span><span class="sol__tech">Classificação de texto</span></div>
+              <div class="sol__top"><span class="sol__code">S15</span><span class="sol__tech">Classificação de texto</span></div>
               <h3 class="sol__title">Triagem de mensagens</h3>
               <p class="sol__desc">Cada mensagem chega à pessoa certa, e os casos urgentes vão para o topo da fila.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Classificação de texto:</strong> separa as mensagens por assunto e urgência de forma automática.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Fila de atendimento organizada por assunto e prioridade.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S16</span><span class="sol__tech">NLP</span></div>
+              <h3 class="sol__title">Monitoria de qualidade</h3>
+              <p class="sol__desc">Avalie todos os atendimentos por texto, e não só uma amostra, com os mesmos critérios para todos.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>NLP:</strong> a IA lê as conversas e confere se cada critério de qualidade foi cumprido.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Nota por atendimento e por atendente, com exemplos.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S17</span><span class="sol__tech">Resumo automático</span></div>
+              <h3 class="sol__title">Resumo de conversas</h3>
+              <p class="sol__desc">Quem pega o caso entende tudo em segundos, sem rolar a conversa inteira.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Resumo automático:</strong> a IA lê o histórico e escreve um resumo curto com o pedido e o que falta fazer.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Resumo pronto em cada atendimento.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S18</span><span class="sol__tech">Análise de sentimento</span></div>
+              <h3 class="sol__title">Cliente irritado em tempo real</h3>
+              <p class="sol__desc">Perceba quando a conversa está azedando e passe para alguém mais experiente antes da reclamação.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Análise de sentimento:</strong> identifica pelo texto o tom de insatisfação enquanto a conversa acontece.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Alerta para o supervisor no meio do atendimento.</span></p>
             </article>
           </div>
         </div>
@@ -3225,25 +3291,46 @@ select.input option { background: var(--surface); color: var(--silver); }
           <p class="tabpanel__intro">Enxergar o caixa e a margem antes do aperto.</p>
           <div class="tabpanel__grid">
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S10</span><span class="sol__tech">Modelo de previsão</span></div>
+              <div class="sol__top"><span class="sol__code">S19</span><span class="sol__tech">Modelo de previsão</span></div>
               <h3 class="sol__title">Previsão de fluxo de caixa</h3>
               <p class="sol__desc">Veja com semanas de antecedência quando o caixa vai apertar e decida com calma.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Modelo de previsão:</strong> projeta entradas e saídas a partir do histórico e das contas a vencer.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Painel com o caixa projetado para as próximas semanas.</span></p>
             </article>
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S11</span><span class="sol__tech">Análise de elasticidade</span></div>
+              <div class="sol__top"><span class="sol__code">S20</span><span class="sol__tech">Análise de elasticidade</span></div>
               <h3 class="sol__title">Precificação e margem</h3>
               <p class="sol__desc">Descubra quais produtos dão lucro de verdade e onde o preço pode subir ou precisa ser revisto.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Análise de elasticidade:</strong> mede o quanto as vendas de cada item mudam quando o preço muda.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Tabela de preço sugerido com a margem de cada item.</span></p>
             </article>
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S12</span><span class="sol__tech">Score de risco</span></div>
+              <div class="sol__top"><span class="sol__code">S21</span><span class="sol__tech">Score de risco</span></div>
               <h3 class="sol__title">Risco de inadimplência</h3>
               <p class="sol__desc">Saiba antes para quem vender a prazo e quem precisa de uma condição diferente.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Score de risco:</strong> uma nota que estima a chance de atraso com base no histórico de pagamentos.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Nota de risco por cliente, direto no seu cadastro.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S22</span><span class="sol__tech">Conciliação automática</span></div>
+              <h3 class="sol__title">Extrato que bate sozinho</h3>
+              <p class="sol__desc">Confira entradas e saídas do banco com as vendas sem passar a tarde na planilha.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Conciliação automática:</strong> casa cada lançamento do extrato com a venda ou conta correspondente.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Lista do que bateu e do que precisa olhar.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S23</span><span class="sol__tech">Detecção de anomalias</span></div>
+              <h3 class="sol__title">Pagamento duplicado ou estranho</h3>
+              <p class="sol__desc">Pegue cobranças em dobro, valores fora do padrão e gastos que não deveriam estar ali.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Detecção de anomalias:</strong> aprende o padrão normal dos pagamentos e destaca o que foge dele.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Alerta com o lançamento e o motivo da suspeita.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S24</span><span class="sol__tech">Simulação</span></div>
+              <h3 class="sol__title">E se eu mudar o preço?</h3>
+              <p class="sol__desc">Teste aumento, desconto ou novo produto antes de fazer, e veja o efeito no caixa.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Simulação:</strong> projeta vendas e margem com base em como seus clientes reagiram no passado.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Simulador simples com cenários lado a lado.</span></p>
             </article>
           </div>
         </div>
@@ -3253,25 +3340,46 @@ select.input option { background: var(--surface); color: var(--silver); }
           <p class="tabpanel__intro">Visão computacional: o computador entende imagens de câmera e transforma o que vê em números.</p>
           <div class="tabpanel__grid">
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S13</span><span class="sol__tech">Detecção de objetos</span></div>
+              <div class="sol__top"><span class="sol__code">S25</span><span class="sol__tech">Detecção de objetos</span></div>
               <h3 class="sol__title">Inventário por câmera</h3>
               <p class="sol__desc">Confira a prateleira sem contar item por item e saiba na hora o que está faltando.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Detecção de objetos:</strong> a câmera localiza e conta cada produto na imagem.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Contagem por foto ou câmera, com alerta de prateleira vazia.</span></p>
             </article>
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S14</span><span class="sol__tech">Classificação de imagens</span></div>
+              <div class="sol__top"><span class="sol__code">S26</span><span class="sol__tech">Classificação de imagens</span></div>
               <h3 class="sol__title">Controle de qualidade</h3>
               <p class="sol__desc">Encontre defeitos na produção ou no recebimento de mercadorias com o mesmo critério, o dia inteiro.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Classificação de imagens:</strong> compara cada peça com exemplos de peças boas e com defeito.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Registro com foto de cada item reprovado.</span></p>
             </article>
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S15</span><span class="sol__tech">Contagem anônima</span></div>
+              <div class="sol__top"><span class="sol__code">S27</span><span class="sol__tech">Contagem anônima</span></div>
               <h3 class="sol__title">Fluxo de pessoas</h3>
               <p class="sol__desc">Entenda os horários de maior movimento e ajuste equipe e vitrine com base em dados.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Contagem anônima:</strong> a câmera conta quem passa, sem reconhecimento facial e sem guardar rostos.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Painel de movimento por hora e por dia da semana.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S28</span><span class="sol__tech">OCR</span></div>
+              <h3 class="sol__title">Notas e comprovantes por foto</h3>
+              <p class="sol__desc">Tire foto da nota ou do comprovante e os dados entram no sistema sem digitar.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>OCR:</strong> a IA lê o texto da imagem e separa valor, data e fornecedor.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Planilha preenchida a partir das fotos.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S29</span><span class="sol__tech">Detecção de objetos</span></div>
+              <h3 class="sol__title">Segurança e uso de EPI</h3>
+              <p class="sol__desc">Saiba quando alguém entra em área de risco ou sem capacete, luva ou colete.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Detecção de objetos:</strong> a câmera reconhece pessoas e equipamentos em cada imagem.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Alerta com a foto do momento.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S30</span><span class="sol__tech">Contagem por imagem</span></div>
+              <h3 class="sol__title">Contagem em obra e lavoura</h3>
+              <p class="sol__desc">Conte sacos, caixas, mudas ou peças por foto ou drone, sem contar na mão.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Contagem por imagem:</strong> a IA encontra e conta cada item na imagem.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Contagem com a imagem marcada para conferência.</span></p>
             </article>
           </div>
         </div>
@@ -3281,28 +3389,57 @@ select.input option { background: var(--surface); color: var(--silver); }
           <p class="tabpanel__intro">IA generativa: cria textos e respostas novas a partir de instruções e dos seus próprios dados.</p>
           <div class="tabpanel__grid">
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S16</span><span class="sol__tech">RAG</span></div>
+              <div class="sol__top"><span class="sol__code">S31</span><span class="sol__tech">RAG</span></div>
               <h3 class="sol__title">Base de conhecimento com fontes</h3>
               <p class="sol__desc">Sua equipe pergunta em português e recebe a resposta junto com o trecho do manual que a sustenta.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>RAG:</strong> a IA busca a resposta nos seus próprios documentos e mostra de onde tirou cada informação.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Assistente interno que cita as fontes.</span></p>
             </article>
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S17</span><span class="sol__tech">Geração de texto</span></div>
+              <div class="sol__top"><span class="sol__code">S32</span><span class="sol__tech">Geração de texto</span></div>
               <h3 class="sol__title">Conteúdo para redes</h3>
               <p class="sol__desc">Ganhe ideias e rascunhos de posts na voz da sua marca, prontos para você revisar e publicar.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Geração de texto:</strong> a IA cria rascunhos novos a partir de instruções, exemplos e do tom da sua marca.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Calendário de posts com textos para aprovar.</span></p>
             </article>
             <article class="sol glass tilt" data-reveal>
-              <div class="sol__top"><span class="sol__code">S18</span><span class="sol__tech">Automação de documentos</span></div>
+              <div class="sol__top"><span class="sol__code">S33</span><span class="sol__tech">Automação de documentos</span></div>
               <h3 class="sol__title">Documentos e propostas</h3>
               <p class="sol__desc">Gere propostas, orçamentos e contratos padronizados em poucos cliques, sem copiar e colar.</p>
               <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Automação de documentos:</strong> preenche modelos prontos com os dados de cada cliente.</span></p>
               <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Documento em PDF gerado a partir de um formulário simples.</span></p>
             </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S34</span><span class="sol__tech">Texto para consulta</span></div>
+              <h3 class="sol__title">Pergunte aos seus números</h3>
+              <p class="sol__desc">Escreva em português "quanto vendi de bebida em março?" e receba a resposta com o gráfico.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Texto para consulta:</strong> a IA transforma sua pergunta em uma consulta aos seus dados.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Assistente que responde sobre suas planilhas.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S35</span><span class="sol__tech">Geração de conteúdo</span></div>
+              <h3 class="sol__title">Catálogo e fichas de produto</h3>
+              <p class="sol__desc">Crie descrições de produto, cardápio e anúncios de marketplace a partir de uma foto e de poucos dados.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Geração de conteúdo:</strong> a IA escreve textos padronizados no tom da sua marca.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Catálogo pronto para revisar e publicar.</span></p>
+            </article>
+            <article class="sol glass tilt" data-reveal>
+              <div class="sol__top"><span class="sol__code">S36</span><span class="sol__tech">Voz para texto</span></div>
+              <h3 class="sol__title">Formulário falado</h3>
+              <p class="sol__desc">Preencha relatórios de visita, ordens de serviço e pedidos falando no celular.</p>
+              <p class="sol__explain"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Voz para texto:</strong> transcreve o áudio e organiza nas perguntas certas do formulário.</span></p>
+              <p class="sol__deliver"><span class="sol__deliver-k">Entrega <span aria-hidden="true">→</span></span><span class="sol__deliver-v">Relatório preenchido a partir de um áudio.</span></p>
+            </article>
           </div>
         </div>
+      </div>
+
+      <div class="sol-more glass" data-reveal>
+        <div>
+          <p class="sol-more__title">Não achou a sua?</p>
+          <p class="sol-more__text">Os exemplos são só o começo. Conte o problema do seu negócio e a gente desenha a solução junto.</p>
+        </div>
+        <a class="btn btn--primary magnetic" href="#contato">Conte sua ideia</a>
       </div>
     </div>
   </section>
